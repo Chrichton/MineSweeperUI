@@ -1,0 +1,37 @@
+﻿@page "/minesweeper"
+@using WebApplication1.Shared
+@inject HttpClient Http
+
+<h1>MineSweeper</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+@if (fields == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <tbody>
+            @foreach (var rows in fields)
+            {
+                <tr>
+                    @foreach (var column in rows)
+                    {
+                        <td>@column.Value</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@functions {
+    IEnumerable<IEnumerable<MineSweeperField>> fields;
+
+    protected override async Task OnInitAsync()
+    {
+        fields = await Http.GetJsonAsync<IEnumerable<IEnumerable<MineSweeperField>>>("api/SampleData/MineSweeperFields");
+    }
+}

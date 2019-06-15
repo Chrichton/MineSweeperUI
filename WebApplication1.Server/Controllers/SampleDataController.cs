@@ -26,5 +26,18 @@ namespace WebApplication1.Server.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             });
         }
+
+        [HttpGet("[action]")]
+        public IEnumerable<IEnumerable<MineSweeperField>> MineSweeperFields()
+        {
+            return Enumerable.Range(0, 4)
+                .Select(row => Enumerable.Range(0, 3)
+                .Select(col => new MineSweeperField
+                {
+                    Column = col,
+                    Row = row,
+                    Value = $"{col}{row}"
+                }));
+        }
     }
 }
