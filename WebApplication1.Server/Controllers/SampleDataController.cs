@@ -35,8 +35,15 @@ namespace WebApplication1.Server.Controllers
                 {
                     Column = col,
                     Row = row,
-                    Value = $"{col}{row}"
+                    Value = GetRandomFieldValue()
                 }));
+        }
+
+        private string GetRandomFieldValue()
+        {
+            var rng = new Random();
+            var value = rng.Next(0, 8);
+            return value == 0 ? " " : Convert.ToString(value);
         }
     }
 }

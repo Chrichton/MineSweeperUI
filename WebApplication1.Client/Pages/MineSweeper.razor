@@ -14,12 +14,12 @@ else
 {
     <table class="table">
         <tbody>
-            @foreach (var rows in fields)
+            @foreach (var row in fields)
             {
                 <tr>
-                    @foreach (var column in rows)
+                    @foreach (var col in row)
                     {
-                        <td>@column.Value</td>
+                        <td><input bind="@col.Value" onclick="@(() => FieldClicked(col.Column, col.Column))"/></td>
                     }
                 </tr>
             }
@@ -33,5 +33,10 @@ else
     protected override async Task OnInitAsync()
     {
         fields = await Http.GetJsonAsync<IEnumerable<IEnumerable<MineSweeperField>>>("api/SampleData/MineSweeperFields");
+    }
+
+    private void FieldClicked(int col, int row)
+    {
+        Console.WriteLine($"FieldClicked col: {col} row: {row}");
     }
 }
