@@ -19,7 +19,7 @@ else
                 <tr>
                     @foreach (var col in row)
                     {
-                        <td><input bind="@col.Value" onclick="@(() => FieldClicked(col.Column, col.Column))"/></td>
+                        <td><input bind="@col.Value" onclick="@(() => FieldClicked(col.Column, col.Row))"/></td>
                     }
                 </tr>
             }
